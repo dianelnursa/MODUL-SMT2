@@ -1,0 +1,173 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+abstract class Pegawai {
+       abstract void lihatData();
+}
+class PegawaiKontrak extends Pegawai {
+    int noPeg, kehadiran, gaji, masaKontrak;
+    String nama;
+
+    public PegawaiKontrak(int noPeg, String nama, int kehadiran, int gaji, int masaKontrak) {
+        this.noPeg = noPeg;
+        this.nama = nama;
+        this.masaKontrak = masaKontrak;
+        this.kehadiran = kehadiran;
+        this.gaji = gaji;
+    }
+
+    public int getUangMakan() {
+        return 8000 * kehadiran;
+    }
+//setter
+    public void setNoPeg(int noPeg) {
+        this.noPeg = noPeg;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+    public void setMasaKontrak(int masaKontrak) {
+        this.masaKontrak = masaKontrak;
+    }
+
+    public void setKehadiran(int kehadiran) {
+        this.kehadiran = kehadiran;
+    }
+
+    public void setGaji(int gaji) {
+        this.gaji = gaji;
+    }
+
+    @Override
+    public void lihatData() {
+        System.out.println("No. Pegawai\t\t: " + noPeg);
+        System.out.println("Nama Pegawai\t\t: " + nama.toUpperCase());
+        System.out.println("Masa Kontrak\t\t: " + masaKontrak + " Tahun");
+        System.out.println("Kehadiran\t\t: " + kehadiran + " Hari");
+        System.out.println("Uang Makan\t\t: " +"Rp. "+ getUangMakan()+ ",- (@8000/hari)");
+        System.out.println("Gaji\t\t\t: " +"Rp. " + gaji + ",-");
+        int gajiBersih = getUangMakan() + gaji;
+        System.out.println("Total Gaji Bersih\t: " +"Rp. "+ gajiBersih + ",-");
+    }
+
+    void hitungGaji() {
+        int gajiBersih = getUangMakan() + gaji;
+        System.out.println("Gaji Bersih : " + gajiBersih);
+    }
+}
+
+class PegawaiTetap extends Pegawai {
+    int noPeg, kehadiran, gaji;
+    String nama;
+    public final int tunjangan = 500000;
+    public PegawaiTetap(int noPeg, String nama, int kehadiran, int gaji) {
+        this.noPeg = noPeg;
+        this.nama = nama;
+        this.kehadiran = kehadiran;
+        this.gaji = gaji;
+    }
+
+    public int getUangMakan() {
+        return 8000 * kehadiran;
+    }
+//setter
+    public void setNoPeg(int noPeg) {
+        this.noPeg = noPeg;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public void setKehadiran(int kehadiran) {
+        this.kehadiran = kehadiran;
+    }
+
+    public void setGaji(int gaji) {
+        this.gaji = gaji;
+    }
+
+    @Override
+    public void lihatData() {
+        System.out.println("No. Pegawai\t\t: " + noPeg);
+        System.out.println("Nama Pegawai\t\t: " + nama.toUpperCase());
+        System.out.println("Kehadiran\t\t: " + kehadiran + " Hari");
+        System.out.println("Uang Makan\t\t: " + "Rp. "+ getUangMakan() + ",- (@8000/hari)");
+        System.out.println("Tunjangan\t\t: "+ "Rp. " + tunjangan+ ",-");
+        System.out.println("Gaji\t\t\t: " + "Rp. " + gaji+ ",-");
+        int gajiBersih = getUangMakan() + gaji;
+        System.out.println("Total Gaji Bersih\t: "+ "Rp. " + gajiBersih+ ",-\n");
+    }
+//INI ADALAH METHOD YANG TIDAK DAPAT DI OVERRIDE KARENA MENGGUNKAN KEYWORD FINAL
+     void hitungGaji() {
+        int gajiBersih = getUangMakan() + gaji;
+        System.out.println("Gaji Bersih : " + gajiBersih);
+    }
+}
+//INI ADALAH CLASS YANG TIDAK DAPAT DITURUNKAN
+final class KelasUtama {
+    public static void main(String[] args) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PegawaiKontrak pk = new PegawaiKontrak(0, "Tidak ada", 0 , 0,0);
+        PegawaiTetap pt = new PegawaiTetap(0, "Tidak ada", 0, 0);
+        while (true) {
+            System.out.println("|==============================================|");
+            System.out.println("|             PT. BITING BERSATU               |");
+            System.out.println("|==============================================|");
+            System.out.println("|\tMENU UTAMA\t |\n|________________________|");
+            System.out.println("1. Input Data Pegawai");
+            System.out.println("2. Lihat Data Pegawai");
+            System.out.println("3. Keluar");
+            int pilih1 = 0;
+            int pilih2 = 0;  
+            try {
+                System.out.print("Masukkan pilihan [1/2/3] : ");
+                pilih1 = Integer.parseInt(br.readLine());
+                switch (pilih1) {
+                    case 1:
+                        System.out.println("1. Pegawai Kontrak");
+                        System.out.println("2. Pegawai Tetap");
+                        System.out.print("Masukkan pilihan [1/2] : ");
+                        pilih2 = Integer.parseInt(br.readLine());
+                        if (pilih2 == 1) {
+                            System.out.println("=========================");
+                            System.out.print("\nInput no. pegawai kontrak\t\t : ");
+                            double no = Double.parseDouble(br.readLine());
+                            System.out.print("Input nama pegawai kontrak\t\t : ");
+                            String nama = br.readLine();
+                            System.out.print("Input masa kontrak (per tahun)\t\t : ");
+                            int masa = Integer.parseInt(br.readLine());
+                            System.out.print("Input kehadiran (per hari dalam sebulan) : ");
+                            int hadir = Integer.parseInt(br.readLine());
+                            System.out.print("Input gaji (per bulan)\t\t\t : ");
+                            int gaji = Integer.parseInt(br.readLine());
+                            pk = new PegawaiKontrak((int) no, nama, hadir, gaji,masa);
+                            System.out.println("\n\n=====DATA TERSIMPAN=====\n");
+                        }   if (pilih2 == 2) {
+                            System.out.print("\nInput no. pegawai tetap\t\t\t : ");
+                            double no = Double.parseDouble(br.readLine());
+                            System.out.print("Input nama pegawai tetap\t\t : ");
+                            String nama = br.readLine();
+                            System.out.print("Input kehadiran (per hari dalam sebulan) : ");
+                            int hadir = Integer.parseInt(br.readLine());
+                            System.out.print("Input gaji (per bulan)\t\t\t : ");
+                            int gaji = Integer.parseInt(br.readLine());
+                            pt = new PegawaiTetap((int) no, nama, hadir, gaji);
+                            System.out.println("=====DATA TERSIMPAN=====\n");
+                        }   break;
+                    case 2:
+                        System.out.println("===DATA PEGAWAI KONTRAK===");
+                        pk.lihatData();
+                        System.out.println("===DATA PEGAWAI TETAP===");
+                        pt.lihatData();
+                        break;
+                    default:
+                        System.exit(0);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+}
