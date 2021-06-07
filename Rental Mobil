@@ -1,0 +1,147 @@
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+interface receive {
+    public void DataDiri();
+}
+class data implements receive {
+    public void DataDiri() {
+        System.out.println("\n===================================");
+        System.out.println("|| TERIMAKASIH ATAS KUNJUNGANNYA ||");
+        System.out.println("|| DINJAYA RENTAL MOBIL ||");
+        System.out.println("===================================");
+        System.out.println("||            TTD           ||");
+        System.out.println("|| Nama : Dian Budi Elnursa ||");
+        System.out.println("|| NIM  : 200631100070      ||");
+        System.out.println("===================================");
+    }
+}
+abstract class Diler {
+    String nama, merk, mobil;
+    int harga, totalHarga, jangkaPeminjaman;
+}
+class Honda extends Diler {
+    Scanner n = new Scanner(System.in);
+    public void Honda() {
+        System.out.println("|=========================================|");
+        System.out.println("|________________||HONDA||________________|");
+        System.out.println("| New Brio \t ||\t    Rp.270000,00  |");
+        System.out.println("| City\t\t ||\t    Rp.337000,00  |");
+        System.out.println("| CR-V\t\t ||\t    Rp.460000,00  |");
+        System.out.println("| BR-V\t\t ||\t    Rp.255000,00  |");
+        System.out.println("| Odysses\t ||\t    Rp.757000,00  |");
+        System.out.println("| Mobilio\t ||\t    Rp.208000,00  |");
+        System.out.println("| New Honda Jazz ||\t    Rp.248000,00  |");
+        System.out.println("-------------------------------------------");
+        System.out.println("\nINPUT DATA RENTAL");
+        System.out.print("Masukkan Nama : ");
+        nama = n.nextLine();
+        System.out.print("Masukkan Mobil : ");
+        mobil = n.nextLine();
+        System.out.print("Masukkan Harga Mobil : ");
+        harga = n.nextInt();
+        System.out.print("Jangka Waktu Peminjaman : ");
+        jangkaPeminjaman = n.nextInt();
+    }
+
+    public void cetak() {
+        System.out.println("\n======||DATA RENTAL MOBIL HONDA||======");
+        System.out.println("Nama Pemesan : " + nama.toUpperCase());
+        System.out.println("Mobil : " + mobil);
+        System.out.println("Jangka Peminjaman : " + jangkaPeminjaman + " Hari");
+        System.out.println("Total Harga : Rp. " + jangkaPeminjaman * harga+ ",-");
+    }
+}
+
+class Toyota extends Diler {
+    Scanner w = new Scanner(System.in);
+    public void Yamaha() {
+        System.out.println("|=========================================|");
+        System.out.println("|________________||TOYOTA||_______________|");
+        System.out.println("| Toyota Raize       ||    Rp.290000,00   |");
+        System.out.println("| Toyota Rush        ||    Rp.300000,00   |");
+        System.out.println("| Toyota KijangInova ||    Rp.450000,00   |");
+        System.out.println("| Toyota Fortuner    ||    Rp.255000,00   |");
+        System.out.println("| Toyota Avanza      ||    Rp.230000,00   |");
+        System.out.println("| Toyota Agya        ||    Rp.208000,00   |");
+        System.out.println("| Toyota Calya       ||    Rp.200000,00   |");
+        System.out.println("-------------------------------------------");
+        System.out.println("\nINPUT DATA RENTAL");
+        System.out.print("Masukkan Nama : ");
+        nama = w.nextLine();
+        System.out.print("Masukkan Mobil : ");
+        mobil = w.nextLine();
+        System.out.print("Masukkan Harga Mobil : ");
+        harga = w.nextInt();
+        System.out.print("Jangka Waktu Peminjaman : ");
+        jangkaPeminjaman = w.nextInt();
+    }
+    public void cetak() {
+        System.out.println("\n======||DATA PERENTAL MOBIL TOYOTA||======");
+        System.out.println("Nama Pemesan : " + nama.toUpperCase());
+        System.out.println("Mobil : " + mobil);
+        System.out.println("Jangka Peminjaman : " + jangkaPeminjaman + " Hari");
+        System.out.println("Total Harga : Rp. " + jangkaPeminjaman * harga +",-");
+    }
+}
+class rental {
+    public static void main(String[] args) {
+        Scanner n = new Scanner(System.in);
+        Honda honda = new Honda();
+        Toyota toyota = new Toyota();
+        data DataDiri = new data();
+        String ulangi, ulangi1;
+        int pilihan, pilihan1;
+        do {
+            System.out.println("|==============================================|");
+            System.out.println("|            DINJAYA RENTAL MOBIL              |");
+            System.out.println("|==============================================|");
+            System.out.println("|\tMENU UTAMA\t |\n|________________________|");
+            System.out.println("1. Lihat Daftar Mobil");
+            System.out.println("2. Rental Mobil");
+            System.out.println("3. Keluar");
+            System.out.print("Masukkan Pilihan Anda : ");
+            pilihan = n.nextInt();
+            switch (pilihan) {
+                case 1:
+                    System.out.println("\n===||DAFTAR MOBIL||===");
+                    System.out.println("1. Honda\n2. Toyota");
+                    System.out.print("Masukkan Pilihan : ");
+                    pilihan1 = n.nextInt();
+                    switch (pilihan1) {
+                        case 1:
+                            honda.Honda();
+                            break;
+                        case 2:
+                            toyota.Yamaha();
+                            break;
+                    }
+                    break;
+                case 2:
+                    System.out.println("\n===||DATA RENTAL||===");
+                    System.out.println("1. Honda\n2. Toyota");
+                    System.out.print("Masukkan Pilihan : ");
+                    pilihan1 = n.nextInt();
+                    switch (pilihan1) {
+                        case 1:
+                            honda.cetak();
+                            break;
+                        case 2:
+                            toyota.cetak();
+                            break;
+                    }
+                    break;
+                case 3:
+                    DataDiri.DataDiri();
+                    System.exit(0);
+                    break;
+            }
+            System.out.println("\nInput Pemesanan Rental Lagi ? [Y/N]");
+            ulangi = n.next();
+        } while (ulangi.equalsIgnoreCase("Y"));
+        System.out.println("====PROGRAM SELESAI====");
+        DataDiri.DataDiri();
+    }
+}
